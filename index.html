@@ -84,12 +84,18 @@
             <div class="skills">
               <h4>Skillset Utama</h4>
               <div class="skill-tags">
-                <span class="skill-tag">UI/UX Design</span>
-                <span class="skill-tag">HTML/CSS</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">MERN</span>
-                <span class="skill-tag">Typescript</span>
+                <!-- <span class="skill-tag">UI/UX Design</span> -->
+                <!-- <span class="skill-tag">HTML/CSS</span> -->
+                <span class="skill-tag">Front End Developer</span>
+                <span class="skill-tag">Back End Developer</span>
                 <span class="skill-tag">Laravel Framework</span>
+                <span class="skill-tag">Golang</span>
+                <span class="skill-tag">GoFiber Framework</span>
+                <span class="skill-tag">Core Programming Skills</span>
+                <span class="skill-tag">Database Management</span>
+                <span class="skill-tag">Soft Skills</span>
+                <!-- <span class="skill-tag">MERN</span> -->
+                <!-- <span class="skill-tag">Typescript</span> -->
                 <!-- <span class="skill-tag">User Research</span> -->
                 <!-- <span class="skill-tag">Prototyping</span> -->
                 <span class="skill-tag">Responsive Design</span>
@@ -190,11 +196,31 @@
                   <div class="tool-icon">
                     <img
                       width="40px"
+                      src="./images/rest-api.png"
+                      alt="rest-api"
+                    />
+                  </div>
+                  <span>Rest API</span>
+                </div>
+                <div class="tool-item">
+                  <div class="tool-icon">
+                    <img
+                      width="40px"
                       src="./images/postman.png"
                       alt="postman"
                     />
                   </div>
                   <span>Postman</span>
+                </div>
+                <div class="tool-item">
+                  <div class="tool-icon">
+                    <img
+                      width="40px"
+                      src="./images/golang-144.png"
+                      alt="golang"
+                    />
+                  </div>
+                  <span>Golang</span>
                 </div>
               </div>
             </div>
@@ -234,70 +260,199 @@
               </div>
             </div>
           </div> -->
-          <div class="portfolio-item" data-category="ui-ux">
-            <div class="portfolio-img">
-              <img src="./images/myprojek/apk-compro-gain.png" alt="Redesign Compro GAIN" />
-            </div>
-            <div class="portfolio-info">
-              <h3>Redesign UI/UX Website Company Profile PT GAIN</h3>
-              <p>
-                Perancangan ulang tampilan dan pengalaman pengguna untuk website company profile PT Global Abadi Inti Nusantara (GAIN). Proyek ini bertujuan meningkatkan daya tarik visual, memperbaiki alur navigasi, serta meningkatkan konversi melalui pendekatan desain yang berfokus pada pengguna.
-              </p>
-              <div class="portfolio-tags">
-                <span class="portfolio-tag">Figma</span>
-                <span class="portfolio-tag">User Research</span>
-                <span class="portfolio-tag">Prototyping</span>
-                <span class="portfolio-tag">Laravel</span>
-                <span class="portfolio-tag">HTML/CSS</span>
-                <span class="portfolio-tag">JavaScript</span>
-              </div>
-              <a href="https://gain.co.id" target="_blank" class="portfolio-link">🔗 Lihat Proyek</a>
-            </div>
-          </div>
+          <!-- Portfolio Item dengan Galeri Sederhana -->
+<!-- Portfolio Item dengan Galeri Sederhana -->
+<div class="portfolio-item" data-category="ui-ux web">
+  <div class="portfolio-img">
+    <div class="portfolio-gallery">
+      <img src="./images/myprojek/apk-compro-gain.png" alt="Redesign Compro GAIN" 
+           onclick="openModal(this)" 
+           data-images='[
+             "./images/myprojek/apk-compro-gain.png",
+             "./images/myprojek/gain-slide2.png", 
+             "./images/myprojek/gain-slide3.png"
+           ]' 
+           />
+    </div>
+  </div>
+  <div class="portfolio-info">
+    <h3>Redesign UI/UX Website Company Profile PT GAIN</h3>
+    <p>
+      Perancangan ulang tampilan dan pengalaman pengguna untuk website company profile PT Global Abadi Inti Nusantara (GAIN). 
+      Proyek ini bertujuan meningkatkan daya tarik visual, memperbaiki alur navigasi, serta meningkatkan konversi melalui pendekatan desain yang berfokus pada pengguna.
+    </p>
+    <div class="portfolio-tags">
+      <span class="portfolio-tag">Figma</span>
+      <span class="portfolio-tag">User Research</span>
+      <span class="portfolio-tag">Prototyping</span>
+      <span class="portfolio-tag">Laravel</span>
+      <span class="portfolio-tag">HTML/CSS</span>
+      <span class="portfolio-tag">JavaScript</span>
+    </div>
+    <a href="https://gain.co.id" target="_blank" class="portfolio-link">🔗 Lihat Proyek</a>
+  </div>
+</div>
+
+      
+<!-- Portfolio Item dengan Galeri Sederhana -->
+<div class="portfolio-item" data-category="ui-ux web">
+  <div class="portfolio-img">
+    <div class="portfolio-gallery">
+      <img src="./images/myprojek/byd-slide1.png" 
+           alt="Aplikasi Website Penjualan Mobil BYD Sales Bipo Tangerang" 
+           onclick="openModal(this)" 
+           data-images='[
+             "./images/myprojek/byd-slide1.png",
+             "./images/myprojek/byd-slide2.png", 
+             "./images/myprojek/byd-slide3.png",
+             "./images/myprojek/byd-slide4.png",
+             "./images/myprojek/byd-slide5.png"
+           ]' 
+      />
+    </div>
+  </div>
+
+  <div class="portfolio-info">
+    <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+      Aplikasi Website Penjualan Mobil BYD Sales Bipo Tangerang
+    </h3>
+    <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-3">
+      Aplikasi website ini dikembangkan sebagai platform digital untuk 
+      <strong>penjualan dan promosi mobil BYD</strong> di wilayah Tangerang. 
+      Dibangun dengan <strong>Laravel Framework</strong> sebagai backend utama, 
+      serta menggunakan <strong>JavaScript</strong> dan <strong>Tailwind CSS</strong> 
+      untuk menciptakan antarmuka yang modern, interaktif, dan responsif. 
+      Website ini menampilkan katalog mobil lengkap dengan spesifikasi, 
+      fitur promo, serta formulir pemesanan yang memudahkan calon pelanggan 
+      dalam menjelajahi produk dan melakukan konsultasi dengan tim sales. 
+      Desainnya dioptimalkan agar <em>user-friendly</em> dan 
+      <strong>SEO-friendly</strong>, mendukung peningkatan visibilitas di mesin pencari.
+    </p>
+
+    <div class="portfolio-tags flex flex-wrap gap-2 mt-3 mb-3">
+      <span class="portfolio-tag bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Laravel</span>
+      <span class="portfolio-tag bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium">JavaScript</span>
+      <span class="portfolio-tag bg-sky-100 text-sky-700 px-3 py-1 rounded-full text-sm font-medium">Tailwind CSS</span>
+      <span class="portfolio-tag bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Responsive Design</span>
+      <span class="portfolio-tag bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium">SEO Optimization</span>
+    </div>
+
+    <a href="https://bydsalesjabodetabek.com/" 
+       target="_blank" 
+       class="portfolio-link inline-block mt-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-200">
+      🔗 Lihat Proyek
+    </a>
+  </div>
+</div>
 
 
-          <div class="portfolio-item" data-category="web">
-            <div class="portfolio-img">
-              <img
-                src="./images/myprojek/apk-administrator.png"
-                alt="Website Administrator PT Albany"
-              />
-            </div>
-            <div class="portfolio-info">
-              <h3>Website Administrator PT Albany</h3>
-              <p>
-                Pengembangan sistem administrator berbasis web untuk PT Albany menggunakan framework Laravel. Website ini dirancang untuk mendukung pengelolaan data internal perusahaan secara efisien.
-              </p>
-              <div class="portfolio-tags">
-                <span class="portfolio-tag">Laravel</span>
-                <span class="portfolio-tag">HTML/CSS</span>
-                <span class="portfolio-tag">JavaScript</span>
-                <span class="portfolio-tag">Responsive</span>
-              </div>
-              <!-- <a href="https://albany-keluhan.me-ndev.my.id" target="_blank" class="portfolio-link">🔗 Lihat Proyek</a> -->
-            </div>
-          </div>
 
 
-          <div class="portfolio-item" data-category="mobile">
-            <div class="portfolio-img">
-              <img
-                src="./images/myprojek/apk-mymusic.jpeg"
-                alt="Aplikasi MyMusic"
-              />
-            </div>
-            <div class="portfolio-info">
-              <h3>Aplikasi Mobile MyMusic</h3>
-              <p>
-                Proyek aplikasi mobile sederhana yang dikembangkan menggunakan React Native sebagai bagian dari tugas akhir pada semester 6 di Universitas Pamulang. Aplikasi ini terintegrasi dengan API eksternal dan dirancang dengan fokus pada antarmuka yang bersih serta pengalaman pengguna yang intuitif.
-              </p>
-              <div class="portfolio-tags">
-                <span class="portfolio-tag">React Native</span>
-                <span class="portfolio-tag">API Integration</span>
-                <span class="portfolio-tag">UI/UX Design</span>
-              </div>
-            </div>
-          </div>
+          <!-- Contoh untuk MOBILE MY MUSIC -->
+<div class="portfolio-item" data-category="mobile">
+  <div class="portfolio-img">
+    <div class="portfolio-gallery">
+      <img src="./images/myprojek/apk-mymusic.jpeg" alt="Aplikasi Mobile MyMusic" 
+           onclick="openModal(this)" 
+           data-images='[
+             "./images/myprojek/mymusic-slide1.jpeg",
+             "./images/myprojek/apk-mymusic.jpeg",
+             "./images/myprojek/mymusic-slide3.jpeg",
+             "./images/myprojek/mymusic-slide4.jpeg",
+             "./images/myprojek/mymusic-slide5.jpeg"
+           ]'
+            />
+    </div>
+  </div>
+  <div class="portfolio-info">
+    <h3>Aplikasi Mobile MyMusic</h3>
+    <p>
+      Proyek aplikasi mobile sederhana yang dikembangkan menggunakan React Native sebagai bagian dari tugas akhir pada semester 6 di Universitas Pamulang. Aplikasi ini terintegrasi dengan API eksternal dan dirancang dengan fokus pada antarmuka yang bersih serta pengalaman pengguna yang intuitif.
+    </p>
+    <div class="portfolio-tags">
+      <span class="portfolio-tag">React Native</span>
+      <span class="portfolio-tag">API Integration</span>
+      <span class="portfolio-tag">UI/UX Design</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- Contoh untuk Website Administrator PT Albany -->
+<div class="portfolio-item" data-category="web">
+  <div class="portfolio-img">
+    <div class="portfolio-gallery">
+      <img src="./images/myprojek/apk-administrator.png" alt="Website Administrator PT Albany" 
+           onclick="openModal(this)" 
+           data-images='[
+             "./images/myprojek/albany-slide1.png",
+             "./images/myprojek/albany-slide2.png",
+             "./images/myprojek/albany-slide3.png"
+           ]'
+            />
+    </div>
+  </div>
+  <div class="portfolio-info">
+    <h3>Website Administrator PT Albany</h3>
+    <p>
+      Pengembangan sistem administrator berbasis web untuk PT Albany menggunakan framework Laravel. 
+      Website ini dirancang untuk mendukung pengelolaan data internal perusahaan secara efisien.
+    </p>
+    <div class="portfolio-tags">
+      <span class="portfolio-tag">Laravel</span>
+      <span class="portfolio-tag">HTML/CSS</span>
+      <span class="portfolio-tag">JavaScript</span>
+      <span class="portfolio-tag">Responsive</span>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Portfolio Item WEB GETLINK -->
+<div class="portfolio-item" data-category="ui-ux web">
+  <div class="portfolio-img">
+    <div class="portfolio-gallery">
+      <img src="./images/myprojek/getlink-slide1.png" 
+           alt="Aplikasi Website Penjualan Jaringan Akses Internet - Getlink" 
+           onclick="openModal(this)" 
+           data-images='[
+             "./images/myprojek/getlink-slide1.png",
+             "./images/myprojek/getlink-slide2.png", 
+             "./images/myprojek/getlink-slide3.png",
+             "./images/myprojek/getlink-slide4.png"
+           ]' 
+      />
+    </div>
+  </div>
+
+  <div class="portfolio-info">
+    <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">
+      Aplikasi Website Penjualan Jaringan Akses Internet (Getlink)
+    </h3>
+    <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-3">
+      <strong>Getlink</strong> adalah aplikasi website penjualan layanan internet yang dibangun menggunakan 
+      <strong>Laravel 11</strong> dengan tampilan antarmuka berbasis <strong>CSS3</strong>. 
+      Proyek ini dirancang untuk memberikan pengalaman pengguna yang modern, cepat, dan responsif, 
+      sekaligus mempermudah pelanggan dalam mengakses informasi dan melakukan pendaftaran layanan secara online.
+    </p>
+
+    <div class="portfolio-tags flex flex-wrap gap-2 mt-3 mb-3">
+      <span class="portfolio-tag bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium">Laravel 11</span>
+      <span class="portfolio-tag bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-sm font-medium">CSS3</span>
+      <span class="portfolio-tag bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium">Responsive Design</span>
+      <span class="portfolio-tag bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-sm font-medium">Web Development</span>
+    </div>
+
+    <a href="https://getlink.getek.co.id/" 
+       target="_blank" 
+       class="portfolio-link inline-block mt-2 text-blue-600 hover:text-blue-800 font-semibold transition-colors duration-200">
+      🔗 Lihat Proyek
+    </a>
+  </div>
+</div>
+
 
 
           <!-- <div class="portfolio-item" data-category="ui-ux">
@@ -736,9 +891,14 @@
     </div>
   </body>
   <!-- Image Zoom Modal -->
-<div id="imageModal" class="image-modal">
+<!-- <div id="imageModal" class="image-modal">
   <span class="close-modal">&times;</span>
   <img class="modal-content" id="modalImage">
+</div> -->
+
+<!-- Modal Gallery -->
+<div id="galleryModal" class="modal-gallery">
+  <div class="modal-gallery-content"></div>
 </div>
 
 </html>

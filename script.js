@@ -60,7 +60,9 @@ filterBtns.forEach((btn) => {
     const filter = btn.getAttribute("data-filter");
 
     portfolioItems.forEach((item) => {
-      if (filter === "all" || item.getAttribute("data-category") === filter) {
+      const categories = item.getAttribute("data-category").split(" "); // pisahkan jadi array
+
+      if (filter === "all" || categories.includes(filter)) {
         item.style.display = "block";
       } else {
         item.style.display = "none";
@@ -328,4 +330,157 @@ function sendToWhatsAppSimple(event) {
   )}`;
 
   window.open(url, "_blank");
+}
+
+// Modal Gallery Functionality
+let currentModalIndex = 0;
+let modalImages = [];
+let modalTitles = [];
+
+function openModal(clickedImage) {
+  const modal = document.getElementById("galleryModal");
+  const images = JSON.parse(clickedImage.getAttribute("data-images"));
+  const titles = JSON.parse(clickedImage.getAttribute("data-titles") || "[]");
+
+  modalImages = images;
+  modalTitles = titles;
+  currentModalIndex = 0;
+
+  updateModal();
+  modal.style.display = "block";
+  document.body.style.overflow = "hidden";
+
+  // Add keyboard navigation
+  document.addEventListener("keydown", handleKeyboardNavigation);
+}
+
+function closeModal() {
+  const modal = document.getElementById("galleryModal");
+  modal.style.display = "none";
+  document.body.style.overflow = "auto";
+  document.removeEventListener("keydown", handleKeyboardNavigation);
+}
+
+function changeModalSlide(direction) {
+  currentModalIndex =
+    (currentModalIndex + direction + modalImages.length) % modalImages.length;
+  updateModal();
+}
+
+function goToSlide(index) {
+  currentModalIndex = index;
+  updateModal();
+}
+
+function updateModal() {
+  const modalContent = document.querySelector(".modal-gallery-content");
+
+  modalContent.innerHTML = `
+    <span class="modal-close" onclick="closeModal()">&times;</span>
+    
+    <div class="modal-nav">
+      <button class="modal-prev" onclick="changeModalSlide(-1)">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <button class="modal-next" onclick="changeModalSlide(1)">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+    </div>
+    
+    <div class="modal-slide active">
+      <img src="${modalImages[currentModalIndex]}" alt="Slide ${
+    currentModalIndex + 1
+  }" />
+    </div>
+    
+    ${
+      modalTitles.length > 0
+        ? `
+      <div class="modal-title">
+        ${modalTitles[currentModalIndex]}
+      </div>
+    `
+        : ""
+    }
+    
+    
+    
+    ${
+      modalImages.length > 1
+        ? `
+      <div class="modal-thumbnails">
+        ${modalImages
+          .map(
+            (img, index) => `
+          <div class="modal-thumbnail ${
+            index === currentModalIndex ? "active" : ""
+          }" 
+               onclick="goToSlide(${index})">
+            <img src="${img}" alt="Thumbnail ${index + 1}" />
+          </div>
+        `
+          )
+          .join("")}
+      </div>
+    `
+        : ""
+    }
+  `;
+}
+
+function handleKeyboardNavigation(event) {
+  switch (event.key) {
+    case "ArrowLeft":
+      changeModalSlide(-1);
+      break;
+    case "ArrowRight":
+      changeModalSlide(1);
+      break;
+    case "Escape":
+      closeModal();
+      break;
+  }
+}
+
+// Close modal when clicking outside content
+window.addEventListener("click", function (event) {
+  const modal = document.getElementById("galleryModal");
+  if (event.target === modal) {
+    closeModal();
+  }
+});
+
+// Swipe support for mobile
+let touchStartX = 0;
+let touchEndX = 0;
+
+document.addEventListener(
+  "touchstart",
+  function (event) {
+    touchStartX = event.changedTouches[0].screenX;
+  },
+  false
+);
+
+document.addEventListener(
+  "touchend",
+  function (event) {
+    touchEndX = event.changedTouches[0].screenX;
+    handleSwipe();
+  },
+  false
+);
+
+function handleSwipe() {
+  const swipeThreshold = 50;
+
+  if (touchEndX < touchStartX - swipeThreshold) {
+    // Swipe left - next slide
+    changeModalSlide(1);
+  }
+
+  if (touchEndX > touchStartX + swipeThreshold) {
+    // Swipe right - previous slide
+    changeModalSlide(-1);
+  }
 }

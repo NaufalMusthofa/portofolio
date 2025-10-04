@@ -51,7 +51,7 @@
 function openWhatsApp() {
   const whatsappNumber = "6288289722296";
   const message =
-    "Halo, saya tertarik untuk mengetahui lebih lanjut mengenai layanan Anda.";
+    "Halo, saya tertarik untuk mengetahui lebih lanjut mengenai keahlian Anda.";
   const encodedMessage = encodeURIComponent(message);
 
   const url = `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodedMessage}`;
