@@ -564,3 +564,110 @@ function handleSwipe() {
     changeModalSlide(-1);
   }
 }
+
+/* ====== COPY DARI SINI: JavaScript ====== */
+(function () {
+  const el = document.querySelector(".animation-profesi");
+  if (!el) return;
+
+  const teksAsli = el.textContent.trim();
+
+  // Daftar kalimat yang akan diketik bergantian (ubah sesuai keinginan)
+  const kalimat = ["Fullstack Developer", "Web Engineer", teksAsli];
+
+  // Aksesibilitas: screen reader membaca teks lengkap, bukan huruf per huruf
+  el.setAttribute("aria-label", teksAsli);
+  el.innerHTML =
+    '<span class="teks" aria-hidden="true"></span><span class="kursor" aria-hidden="true"></span>';
+  const target = el.querySelector(".teks");
+
+  // Hormati pengguna yang mematikan animasi
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    target.textContent = teksAsli;
+    return;
+  }
+
+  const KECEPATAN_KETIK = 70; // ms per huruf
+  const KECEPATAN_HAPUS = 35; // ms per huruf
+  const JEDA_SELESAI = 1800; // ms teks dibiarkan tampil
+  const JEDA_MULAI = 400; // ms sebelum mengetik kalimat berikutnya
+
+  let idx = 0; // kalimat ke-berapa
+  let huruf = 0; // jumlah huruf yang tampil
+  let menghapus = false;
+  let timer;
+
+  function tick() {
+    const teks = kalimat[idx];
+    let tunda;
+
+    if (!menghapus) {
+      huruf++;
+      el.classList.add("mengetik");
+      if (huruf === teks.length) {
+        // selesai mengetik
+        menghapus = true;
+        tunda = JEDA_SELESAI;
+        el.classList.remove("mengetik");
+      } else {
+        tunda = KECEPATAN_KETIK + Math.random() * 40; // ritme natural
+      }
+    } else {
+      huruf--;
+      el.classList.add("mengetik");
+      if (huruf === 0) {
+        // selesai menghapus
+        menghapus = false;
+        idx = (idx + 1) % kalimat.length;
+        tunda = JEDA_MULAI;
+        el.classList.remove("mengetik");
+      } else {
+        tunda = KECEPATAN_HAPUS;
+      }
+    }
+
+    target.textContent = teks.slice(0, huruf);
+    timer = setTimeout(tick, tunda);
+  }
+
+  // Hemat resource: berhenti saat tab tidak aktif
+  document.addEventListener("visibilitychange", () => {
+    clearTimeout(timer);
+    if (!document.hidden) timer = setTimeout(tick, 200);
+  });
+
+  timer = setTimeout(tick, 500);
+})();
+/* ====== SAMPAI SINI ====== */
+
+/* ===== 3) JavaScript: SALIN BAGIAN INI (taruh sebelum </body>) ===== */
+(function () {
+  const targets = document.querySelectorAll(".section-title");
+  if (!targets.length) return;
+
+  // Browser lama tanpa IntersectionObserver: tampilkan langsung
+  if (!("IntersectionObserver" in window)) {
+    targets.forEach((el) => el.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        obs.unobserve(entry.target); // animasi sekali saja, hemat resource
+      });
+    },
+    {
+      threshold: 0.2, // muncul saat 20% elemen terlihat
+      rootMargin: "0px 0px -10% 0px", // sedikit sebelum menyentuh dasar layar
+    },
+  );
+
+  targets.forEach((el, i) => {
+    // stagger kecil kalau ada beberapa judul tampil bersamaan
+    el.style.setProperty("--reveal-delay", (el.dataset.delay || 0) + "ms");
+    observer.observe(el);
+  });
+})();

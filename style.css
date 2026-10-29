@@ -50,6 +50,7 @@ body {
   color: var(--text);
   background-color: var(--bg);
   transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 a {
@@ -64,6 +65,47 @@ a {
   padding: 0 20px;
 }
 
+/* ====== COPY DARI SINI: CSS ====== */
+  .animation-profesi {
+    font-size: clamp(1.4rem, 4vw, 2.6rem);
+    font-weight: 700;
+    margin: 0;
+    min-height: 1.3em;           /* cegah layout loncat saat teks dihapus */
+    text-align: center;
+  }
+ 
+  .animation-profesi .teks {
+    background: linear-gradient(90deg, #22d3ee, #818cf8, #e879f9, #22d3ee);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: gradient-geser 6s linear infinite;
+  }
+ 
+  /* kursor berkedip */
+  .animation-profesi .kursor {
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    margin-left: 4px;
+    vertical-align: -0.12em;
+    background: #22d3ee;
+    border-radius: 2px;
+    animation: kedip 0.9s steps(1) infinite;
+  }
+  .animation-profesi.mengetik .kursor { animation: none; opacity: 1; }
+ 
+  @keyframes gradient-geser { to { background-position: -300% 0; } }
+  @keyframes kedip { 50% { opacity: 0; } }
+ 
+  @media (prefers-reduced-motion: reduce) {
+    .animation-profesi .teks,
+    .animation-profesi .kursor { animation: none; }
+  }
+  /* ====== SAMPAI SINI ====== */
+
 section {
   padding: 80px 0;
 }
@@ -75,6 +117,36 @@ section {
   color: var(--heading);
   position: relative;
 }
+
+/* ===== 2) CSS: SALIN BAGIAN INI ===== */
+ 
+  /* keadaan awal (hanya jika JS aktif) */
+  .js .section-title:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(32px);
+    filter: blur(6px);
+  }
+ 
+  /* transisi menuju tampil */
+  .js .section-title {
+    transition:
+      opacity 0.8s ease,
+      transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.8s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform, filter;
+  }
+ 
+  /* varian opsional: <h2 class="section-title" data-reveal="left"> */
+  .js .section-title[data-reveal="left"]:not(.is-visible)  { transform: translateX(-40px); }
+  .js .section-title[data-reveal="right"]:not(.is-visible) { transform: translateX(40px); }
+  .js .section-title[data-reveal="zoom"]:not(.is-visible)  { transform: scale(0.9); }
+ 
+  /* pengguna yang mematikan animasi: langsung tampil */
+  @media (prefers-reduced-motion: reduce) {
+    .js .section-title:not(.is-visible) { opacity: 1; transform: none; filter: none; }
+    .js .section-title { transition: none; }
+  }
 
 .section-title::after {
   content: "";
@@ -247,17 +319,58 @@ body[data-theme="dark"] #home {
   margin-bottom: 30px;
 }
 
+/* ===== DESKTOP: tampilan sama persis seperti sebelumnya ===== */
 .hero-image {
   flex: 1;
   min-width: 300px;
   text-align: center;
 }
-
+ 
 .hero-image img {
   max-width: 100%;
   height: auto;
+  object-fit: cover;
   border-radius: 20px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+ 
+.icon-atom {
+  pointer-events: none;
+}
+ 
+.atom {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  animation: spin 4s linear infinite;   /* pakai @keyframes spin milik Anda */
+}
+.atom--1 { top: 30px;    right: 70px; rotate: 45deg; }
+.atom--2 { bottom: 30px; left: 56%;   rotate: 65deg; }
+ 
+ 
+/* ===== TABLET & MOBILE: hanya bagian ini yang berubah ===== */
+@media (max-width: 768px) {
+  /* JANGAN min-width: 0, itu bikin kolom foto menciut jadi 0px.
+     min() menjaga perilaku asli (turun ke baris sendiri) tanpa overflow di HP kecil */
+  .hero-image { min-width: min(300px, 100%); }
+  .hero-image img { width: 220px; border-radius: 16px; }
+ 
+  .atom { width: 38px; height: 38px; }
+  .atom--1 { top: 55%;    right: 68px; }
+  .atom--2 { bottom: 16px; left: 15%; }
+}
+ 
+@media (max-width: 480px) {
+  .hero-image img { width: 185px; border-radius: 14px; }
+ 
+  .atom { width: 30px; height: 30px; }
+  .atom--1 { top: 10px;    right: 14px; }
+  .atom--2 { bottom: 10px; left: 46%; }
+}
+ 
+@media (prefers-reduced-motion: reduce) {
+  .atom { animation: none; }
 }
 
 /* About Section */
@@ -1166,7 +1279,6 @@ footer {
   }
 
   .hero-text,
-  .hero-image,
   .about-image,
   .about-text {
     flex: 100%;
