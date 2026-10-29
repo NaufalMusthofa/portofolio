@@ -54,7 +54,7 @@ function applyTheme(theme) {
 }
 
 const savedTheme = getStoredTheme();
-applyTheme(savedTheme || (prefersDarkScheme.matches ? "dark" : "light"));
+applyTheme(savedTheme || "dark");
 
 if (themeToggle) {
   themeToggle.addEventListener("click", () => {
