@@ -95,6 +95,10 @@
   min-height: 100vh;
 }
 
+body[data-theme="dark"] .contact-section {
+  background: linear-gradient(135deg, #0b1220 0%, #111827 45%, #172033 100%);
+}
+
 .contact-section::before {
   content: "";
   position: absolute;
@@ -122,6 +126,20 @@
   margin-bottom: 1rem;
 }
 
+body[data-theme="dark"] .section-title,
+body[data-theme="dark"] .contact-details h3,
+body[data-theme="dark"] .whatsapp-title h2,
+body[data-theme="dark"] .feature-item span,
+body[data-theme="dark"] .chat-message p,
+body[data-theme="dark"] .btn-title,
+body[data-theme="dark"] .contact-info-footer p,
+body[data-theme="dark"] .contact-card h3,
+body[data-theme="dark"] .contact-card p,
+body[data-theme="dark"] .contact-card span,
+body[data-theme="dark"] .only-mobile {
+  color: #e5edf9;
+}
+
 .section-title span {
   color: #0ea5e9;
 }
@@ -131,6 +149,31 @@
   color: #64748b;
   margin-bottom: 3rem;
   line-height: 1.7;
+}
+
+body[data-theme="dark"] .section-description,
+body[data-theme="dark"] .contact-details p,
+body[data-theme="dark"] .whatsapp-title p,
+body[data-theme="dark"] .chat-time,
+body[data-theme="dark"] .btn-subtitle,
+body[data-theme="dark"] .response-time,
+body[data-theme="dark"] .map-click-hint {
+  color: #a8b4c9;
+}
+
+body[data-theme="dark"] .map-section {
+  background: #0b1220;
+}
+
+body[data-theme="dark"] .map-placeholder {
+  background: linear-gradient(135deg, #172033, #0f172a);
+  color: #e5edf9;
+}
+
+body[data-theme="dark"] .map-click-hint {
+  background: rgba(17, 24, 39, 0.9);
+  color: #e5edf9;
+  border: 1px solid rgba(148, 163, 184, 0.2);
 }
 
 .contact-cards {
@@ -149,10 +192,23 @@
   display: flex;
   align-items: center;
   gap: 2.5rem;
-  width: 520px;
+  width: 100%;
+  max-width: 520px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease;
+}
+
+body[data-theme="dark"] .contact-card,
+body[data-theme="dark"] .whatsapp-contact-card,
+body[data-theme="dark"] .whatsapp-header,
+body[data-theme="dark"] .whatsapp-action,
+body[data-theme="dark"] .chat-preview,
+body[data-theme="dark"] .feature-item,
+body[data-theme="dark"] .chat-message {
+  background: rgba(17, 24, 39, 0.88);
+  border-color: rgba(148, 163, 184, 0.2);
+  box-shadow: 0 12px 24px rgba(2, 6, 23, 0.35);
 }
 
 .contact-card:hover {
@@ -627,7 +683,8 @@
 
   .contact-card {
     padding: 1.5rem;
-    width: 300px;
+    width: 100%;
+    max-width: 100%;
   }
 
   .contact-icon {

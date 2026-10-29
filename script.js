@@ -1,3 +1,65 @@
+// Theme Toggle
+const themeToggle = document.getElementById("themeToggle");
+const themeIcon = document.querySelector(".theme-icon");
+const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+
+function applyTheme(theme) {
+  const normalizedTheme =
+    theme === "dark" || theme === "light"
+      ? theme
+      : prefersDarkScheme.matches
+        ? "dark"
+        : "light";
+
+  document.body.setAttribute("data-theme", normalizedTheme);
+
+  if (themeIcon) {
+    const isDark = normalizedTheme === "dark";
+    themeIcon.classList.remove("fa-moon", "fa-sun");
+    themeIcon.classList.add(isDark ? "fa-sun" : "fa-moon");
+  }
+
+  if (themeToggle) {
+    themeToggle.setAttribute(
+      "aria-label",
+      normalizedTheme === "dark"
+        ? "Switch to light mode"
+        : "Switch to dark mode",
+    );
+    themeToggle.title =
+      normalizedTheme === "dark"
+        ? "Switch to light mode"
+        : "Switch to dark mode";
+  }
+
+  localStorage.setItem("theme", normalizedTheme);
+}
+
+const savedTheme = localStorage.getItem("theme");
+applyTheme(savedTheme || (prefersDarkScheme.matches ? "dark" : "light"));
+
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const nextTheme =
+      document.body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    applyTheme(nextTheme);
+  });
+}
+
+if (typeof prefersDarkScheme.addEventListener === "function") {
+  prefersDarkScheme.addEventListener("change", (event) => {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(event.matches ? "dark" : "light");
+    }
+  });
+} else if (typeof prefersDarkScheme.addListener === "function") {
+  prefersDarkScheme.addListener((event) => {
+    if (!localStorage.getItem("theme")) {
+      applyTheme(event.matches ? "dark" : "light");
+    }
+  });
+}
+
 // Mobile Navigation
 const hamburger = document.querySelector(".hamburger");
 const navLinks = document.querySelector(".nav-links");
@@ -246,18 +308,18 @@ Terima kasih!`;
 
   // Method 1: Try WhatsApp Web first (works better with pre-filled text)
   const whatsappWebURL = `https://web.whatsapp.com/send?phone=${whatsappNumber}&text=${encodeURIComponent(
-    whatsappMessage
+    whatsappMessage,
   )}`;
 
   // Method 2: Fallback to wa.me
   const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-    whatsappMessage
+    whatsappMessage,
   )}`;
 
   // Try to detect if user is on mobile or desktop
   const isMobile =
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
+      navigator.userAgent,
     );
 
   if (isMobile) {
@@ -312,7 +374,7 @@ Terima kasih!`;
 
   // Force WhatsApp Web
   const whatsappWebURL = `https://web.whatsapp.com/send?phone=6288289722296&text=${encodeURIComponent(
-    whatsappMessage
+    whatsappMessage,
   )}`;
   window.open(whatsappWebURL, "_blank");
 }
@@ -326,7 +388,7 @@ function sendToWhatsAppSimple(event) {
 
   const text = `Halo, nama saya ${name}. Pesan: ${message}`;
   const url = `https://web.whatsapp.com/send?phone=6288289722296&text=${encodeURIComponent(
-    text
+    text,
   )}`;
 
   window.open(url, "_blank");
@@ -389,8 +451,8 @@ function updateModal() {
     
     <div class="modal-slide active">
       <img src="${modalImages[currentModalIndex]}" alt="Slide ${
-    currentModalIndex + 1
-  }" />
+        currentModalIndex + 1
+      }" />
     </div>
     
     ${
@@ -418,7 +480,7 @@ function updateModal() {
                onclick="goToSlide(${index})">
             <img src="${img}" alt="Thumbnail ${index + 1}" />
           </div>
-        `
+        `,
           )
           .join("")}
       </div>
@@ -459,7 +521,7 @@ document.addEventListener(
   function (event) {
     touchStartX = event.changedTouches[0].screenX;
   },
-  false
+  false,
 );
 
 document.addEventListener(
@@ -468,7 +530,7 @@ document.addEventListener(
     touchEndX = event.changedTouches[0].screenX;
     handleSwipe();
   },
-  false
+  false,
 );
 
 function handleSwipe() {
