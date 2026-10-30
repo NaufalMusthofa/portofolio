@@ -671,3 +671,43 @@ function handleSwipe() {
     observer.observe(el);
   });
 })();
+
+(function () {
+  // Jumlah foto otomatis dari data-images (jaga-jaga jika angka di HTML tidak sinkron)
+  document
+    .querySelectorAll(".portfolio-img img[data-images]")
+    .forEach(function (img) {
+      try {
+        var n = JSON.parse(img.dataset.images).length;
+        var el = img.closest(".portfolio-img").querySelector(".js-count");
+        if (el) el.textContent = n;
+      } catch (e) {}
+    });
+
+  // Tombol "Selengkapnya" hanya tampil jika teks benar-benar terpotong
+  var items = document.querySelectorAll(".portfolio-desc-wrap");
+
+  function checkClamp() {
+    items.forEach(function (wrap) {
+      var p = wrap.querySelector(".portfolio-desc");
+      var btn = wrap.querySelector(".portfolio-more");
+      if (!p || !btn || wrap.classList.contains("is-open")) return;
+      if (p.clientHeight === 0) return; // item sedang disembunyikan oleh filter
+      btn.hidden = p.scrollHeight <= p.clientHeight + 1;
+    });
+  }
+
+  items.forEach(function (wrap) {
+    var btn = wrap.querySelector(".portfolio-more");
+    if (!btn) return;
+    btn.addEventListener("click", function () {
+      var open = wrap.classList.toggle("is-open");
+      btn.textContent = open ? "Lebih sedikit" : "Selengkapnya";
+      btn.setAttribute("aria-expanded", open);
+    });
+  });
+
+  window.addEventListener("load", checkClamp);
+  window.addEventListener("resize", checkClamp);
+  requestAnimationFrame(checkClamp);
+})();
